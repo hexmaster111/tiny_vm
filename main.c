@@ -1,8 +1,34 @@
+#define WINDOWS
+
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef WINDOWS
 #include <unistd.h>
+#endif
 #include <string.h>
 #define MAX_STACK (20)
+
+#ifdef WINDOWS
+char *strsep(char **stringp, const char *delim)
+{
+    char *start = *stringp;
+    char *p;
+    p = (start != NULL) ? strpbrk(start, delim) : NULL;
+    if (p == NULL)
+    {
+        *stringp = NULL;
+    }
+    else
+    {
+        *p = '\0';
+        *stringp = p + 1;
+    }
+    return start;
+}
+
+#define ssize_t int
+
+#endif
 
 int _stack[MAX_STACK] = {0};
 int _stackCurr = 0;
