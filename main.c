@@ -44,13 +44,6 @@ int size()
     return _stackCurr;
 }
 
-enum opp
-{
-    opp_push,
-    opp_add,
-    opp_print,
-};
-
 void Die()
 {
     exit(1);
