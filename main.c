@@ -76,7 +76,7 @@ void Die(const char *msg)
 
 int pop_two(int *t, int *n)
 {
-    if (size() < 1)
+    if (size() < 2)
     {
         fprintf(stdout, "size was :%d\n", size());
         return 0; // not enough elemts to pop
@@ -128,7 +128,10 @@ void do_command(char *command, int arg)
         int vr;
 
         if (!pop_two(&vr, &vl))
-            Die("Not enough values in stack");
+        {
+            fprintf(stdout, "Not enough values in stack\n");
+            return;
+        }
 
         int res = vl + vr;
 
@@ -144,7 +147,10 @@ void do_command(char *command, int arg)
         int vr;
 
         if (!pop_two(&vr, &vl))
-            Die("Not enough values in stack");
+        {
+            fprintf(stdout, "Not enough values on stack\n");
+            return;
+        }
 
         int res = vl - vr;
 
@@ -159,7 +165,10 @@ void do_command(char *command, int arg)
         int vr;
 
         if (!pop_two(&vr, &vl))
-            Die("Not enough values in stack");
+        {
+            fprintf(stdout, "Not enough values on stack\n");
+            return;
+        }
 
         int res = vl / vr;
 
@@ -174,8 +183,10 @@ void do_command(char *command, int arg)
         int vr;
 
         if (!pop_two(&vr, &vl))
-            Die("Not enough values in stack");
-
+        {
+            fprintf(stdout, "Not enough values on stack");
+            return;
+        }
         int res = vl * vr;
 
         if (!push(res))
@@ -189,8 +200,10 @@ void do_command(char *command, int arg)
         int vr;
 
         if (!pop_two(&vr, &vl))
-            Die("Not enough values in stack");
-
+        {
+            fprintf(stdout, "Not enough values on stack\n");
+            return;
+        }
         int res = vl << vr;
 
         if (!push(res))
@@ -204,8 +217,10 @@ void do_command(char *command, int arg)
         int vr;
 
         if (!pop_two(&vr, &vl))
-            Die("Not enough values in stack");
-
+        {
+            fprintf(stdout, "Not enough values on stack\n");
+            return;
+        }
         int res = vl >> vr;
 
         if (!push(res))
@@ -250,7 +265,7 @@ void parse_line(char *line)
 
     do_command(command, arg);
 
-    do_command("!stack", 0);
+    // do_command("!stack", 0);
 
     if (command != NULL)
         free(command);
